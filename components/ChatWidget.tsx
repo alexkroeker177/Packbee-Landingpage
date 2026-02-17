@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { MessageCircle, X, ChevronRight } from 'lucide-react';
 

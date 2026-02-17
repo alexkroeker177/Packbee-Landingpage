@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* Custom scrollbar for the mock app */
+.mock-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.mock-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mock-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* Custom animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.3s ease-out;
+}
+
+@utility animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Packing prototype animations */
+@keyframes scan-success {
+  0% {
+    background-color: rgb(236, 253, 245);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  30% {
+    background-color: rgb(209, 250, 229);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@utility animate-scan-success {
+  animation: scan-success 0.6s ease-out;
+}
+
+@keyframes scan-error {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  50%,
+  90% {
+    transform: translateX(-4px);
+  }
+  30%,
+  70% {
+    transform: translateX(4px);
+  }
+}
+
+@utility animate-scan-error {
+  animation: scan-error 0.5s ease-in-out;
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px 2px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px 6px rgba(16, 185, 129, 0.5);
+  }
+}
+
+@utility animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Features creative — blob morph animations */
+@keyframes blob-morph-1 {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+  25% {
+    border-radius: 55% 45% 35% 65% / 60% 35% 65% 40%;
+  }
+  50% {
+    border-radius: 30% 70% 50% 50% / 50% 65% 35% 50%;
+  }
+  75% {
+    border-radius: 65% 35% 60% 40% / 35% 55% 45% 65%;
+  }
+}
+
+@keyframes blob-morph-2 {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+  }
+  25% {
+    border-radius: 35% 65% 55% 45% / 45% 40% 60% 55%;
+  }
+  50% {
+    border-radius: 50% 50% 40% 60% / 65% 45% 55% 35%;
+  }
+  75% {
+    border-radius: 45% 55% 65% 35% / 40% 60% 40% 60%;
+  }
+}
+
+@keyframes blob-morph-3 {
+  0%, 100% {
+    border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+  }
+  25% {
+    border-radius: 40% 60% 55% 45% / 50% 55% 45% 50%;
+  }
+  50% {
+    border-radius: 60% 40% 45% 55% / 40% 60% 50% 50%;
+  }
+  75% {
+    border-radius: 35% 65% 50% 50% / 55% 45% 55% 45%;
+  }
+}
+
+/* Features creative — scan line sweep */
+@keyframes scan-line-sweep {
+  0%, 100% {
+    top: 0;
+  }
+  50% {
+    top: calc(100% - 2px);
+  }
+}
