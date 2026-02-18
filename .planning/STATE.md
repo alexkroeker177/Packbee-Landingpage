@@ -5,32 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Drive organic traffic to PackBee through SEO-optimized blog content and provide a self-serve knowledge base for customers and prospects.
-**Current focus:** Phase 1 complete — ready for Phase 2
+**Current focus:** Phase 2 in progress — content model
 
 ## Current Position
 
-Phase: 1 of 3 (Infrastructure) — COMPLETE
-Plan: 2 of 2 in current phase
-Status: Phase complete, verified
-Last activity: 2026-02-18 — Phase 1 verified (10/10 must-haves)
+Phase: 2 of 3 (Content Model) — In progress
+Plan: 1 of 2 in current phase
+Status: Plan 02-01 complete
+Last activity: 2026-02-18 — Completed 02-01 (blog content model: Authors, Categories, Sections, Posts, SEO plugin, migration)
 
-Progress: [████░░░░░░] 33%
+Progress: [██████░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 17 min
-- Total execution time: 33 min
+- Total plans completed: 3
+- Average duration: 15 min
+- Total execution time: 47 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 2/2 | 33 min | 17 min |
+| 2 | 1/2 | 14 min | 14 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (8 min), 01-02 (25 min)
+- Last 5 plans: 01-01 (8 min), 01-02 (25 min), 02-01 (14 min)
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -49,6 +50,9 @@ Recent decisions affecting current work:
 - [01-01]: next.config.ts renamed to next.config.mjs for ESM withPayload import
 - [01-01]: No root app/layout.tsx — CSS isolation via separate route group layouts
 - [01-02]: Added `"type": "module"` to package.json for Payload CLI ESM compatibility with Node.js 22
+- [02-01]: `slugField()` returns a single RowField object — use as single field element, NOT spread with `...`
+- [02-01]: `seoPlugin({ fields })` requires FieldsOverride function `({ defaultFields }) => Field[]` — NOT a plain array
+- [02-01]: knowledge-base pre-configured in seoPlugin.collections — plugin skips non-existent collections safely
 
 ### Pending Todos
 
@@ -58,9 +62,10 @@ None yet.
 
 - Phase 3: `FAQPage` schema implementation within Lexical blocks has sparse documentation — a targeted research pass is recommended before planning Phase 3 KB article pages
 - Phase 3: `convertLexicalToHTML()` import path for Payload 3.73+ should be verified at implementation time (marked MEDIUM confidence in research)
+- Phase 3: `NEXT_PUBLIC_SERVER_URL` env var needed for live preview URLs in Posts and KnowledgeBase collections
 
 ## Session Continuity
 
-Last session: 2026-02-18
-Stopped at: Phase 1 complete and verified. Next: Phase 2 planning.
+Last session: 2026-02-18T22:38:00Z
+Stopped at: Completed 02-01-PLAN.md — blog content model complete
 Resume file: None
