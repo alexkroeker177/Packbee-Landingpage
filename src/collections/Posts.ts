@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { revalidatePost } from './hooks/revalidatePost'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -32,6 +33,9 @@ export const Posts: CollectionConfig = {
       },
       schedulePublish: true,
     },
+  },
+  hooks: {
+    afterChange: [revalidatePost],
   },
   fields: [
     {

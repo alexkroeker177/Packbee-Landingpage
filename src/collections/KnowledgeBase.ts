@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { revalidateKB } from './hooks/revalidateKB'
 
 export const KnowledgeBase: CollectionConfig = {
   slug: 'knowledge-base',
@@ -31,6 +32,9 @@ export const KnowledgeBase: CollectionConfig = {
         interval: 100,
       },
     },
+  },
+  hooks: {
+    afterChange: [revalidateKB],
   },
   fields: [
     {
