@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import {
   Clock,
   Pause,
@@ -18,6 +20,19 @@ export const PrototypeHeader: React.FC<PrototypeHeaderProps> = ({
   position,
   totalOrders,
 }) => {
+  const [timeLeft, setTimeLeft] = useState(1800);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
   return (
     <div className="h-12 border-b border-gray-200 flex items-center justify-between px-3 lg:px-5 bg-white shrink-0">
       {/* Left: Order Number */}
@@ -32,7 +47,7 @@ export const PrototypeHeader: React.FC<PrototypeHeaderProps> = ({
       <div className="flex items-center gap-2 lg:gap-3">
         <div className="flex items-center gap-1.5 text-gray-500 text-xs">
           <Clock size={13} />
-          <span className="font-mono">29:48</span>
+          <span className="font-mono">{formattedTime}</span>
         </div>
         <div className="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-full">
           {position}/{totalOrders}

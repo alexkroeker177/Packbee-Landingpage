@@ -15,27 +15,27 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Since switching to PackBee, our mispick rate dropped to nearly zero. The scan-to-verify flow is so intuitive that new packers are productive within minutes.",
+      "Seit wir PackBee nutzen, ist unsere Fehlversandquote auf nahezu null gesunken. Der Scan-Verifikations-Flow ist so intuitiv, dass neue Packer innerhalb von Minuten produktiv sind.",
     name: "Laura M.",
-    role: "Head of Fulfillment",
+    role: "Leiterin Fulfillment",
   },
   {
     quote:
-      "The 'no scan, no label' rule changed everything for us. We used to catch shipping errors after the fact — now they simply can't happen. It's peace of mind at scale.",
+      "Die Regel 'Kein Scan, kein Label' hat alles verändert. Früher haben wir Versandfehler erst im Nachhinein entdeckt — jetzt können sie gar nicht mehr passieren. Sicherheit auf ganzer Linie.",
     name: "Marcus T.",
     role: "Operations Manager",
   },
   {
     quote:
-      "We run a team of eight packers across two shifts. PackBee's live dashboard lets me see exactly who's working on what, without walking the floor.",
+      "Wir arbeiten mit acht Packern in zwei Schichten. Das Live-Dashboard von PackBee zeigt mir genau, wer woran arbeitet — ohne einmal durch die Halle zu laufen.",
     name: "Sophie K.",
-    role: "Warehouse Lead",
+    role: "Warehouse-Leiterin",
   },
   {
     quote:
-      "BillBee handles our orders, PackBee handles the truth. Every scan is logged, every shipment verified. Our customer complaints dropped by 80% in the first month.",
+      "BillBee verwaltet unsere Bestellungen, PackBee sorgt für die Wahrheit. Jeder Scan wird protokolliert, jede Sendung verifiziert. Unsere Kundenbeschwerden sind im ersten Monat um 80 % gesunken.",
     name: "Jonas R.",
-    role: "E-Commerce Director",
+    role: "E-Commerce-Leiter",
   },
 ];
 
@@ -78,7 +78,6 @@ export const Testimonials: React.FC = () => {
       }
 
       // Main pinned timeline
-      // Each card gets: 0.4 hold + 1.0 transition = 1.4 units, last card gets 0.5 hold
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -150,19 +149,22 @@ export const Testimonials: React.FC = () => {
     >
       {/* === Background landscape === */}
 
-      {/* Base gray */}
-      <div className="absolute inset-0 bg-[#E8E4EC]" />
+      {/* Base warm gray */}
+      <div className="absolute inset-0 bg-[var(--color-testimonial-base)]" />
 
-      {/* Pink-orange radial glow — behind the card area */}
+      {/* Honeycomb pattern */}
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.06] pointer-events-none" />
+
+      {/* Amber radial glow — behind the card area */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 50% 45% at 50% 50%, rgba(251,113,133,0.45) 0%, rgba(251,146,60,0.25) 35%, transparent 70%)",
+            `radial-gradient(ellipse 50% 45% at 50% 50%, var(--color-testimonial-glow-a) 0%, var(--color-testimonial-glow-b) 35%, transparent 70%)`,
         }}
       />
 
-      {/* Purple hills — back layer */}
+      {/* Amber hills — back layer */}
       <svg
         className="absolute bottom-0 left-0 w-full h-[55%]"
         viewBox="0 0 1440 500"
@@ -171,8 +173,8 @@ export const Testimonials: React.FC = () => {
       >
         <defs>
           <linearGradient id="hill-back" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#4C1D95" stopOpacity="0.8" />
+            <stop offset="0%" style={{ stopColor: "var(--color-hill-back-top)" }} />
+            <stop offset="100%" style={{ stopColor: "var(--color-hill-back-bottom)" }} />
           </linearGradient>
         </defs>
         <path
@@ -181,7 +183,7 @@ export const Testimonials: React.FC = () => {
         />
       </svg>
 
-      {/* Purple hills — front layer */}
+      {/* Amber hills — front layer */}
       <svg
         className="absolute bottom-0 left-0 w-full h-[45%]"
         viewBox="0 0 1440 400"
@@ -190,9 +192,9 @@ export const Testimonials: React.FC = () => {
       >
         <defs>
           <linearGradient id="hill-front" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6D28D9" stopOpacity="0.85" />
-            <stop offset="50%" stopColor="#5B21B6" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.8" />
+            <stop offset="0%" style={{ stopColor: "var(--color-hill-front-left)" }} />
+            <stop offset="50%" style={{ stopColor: "var(--color-hill-front-mid)" }} />
+            <stop offset="100%" style={{ stopColor: "var(--color-hill-front-right)" }} />
           </linearGradient>
         </defs>
         <path
@@ -227,9 +229,9 @@ export const Testimonials: React.FC = () => {
         <div className="text-center pt-12 sm:pt-16">
           <span
             ref={pillRef}
-            className="inline-block text-purple-600 text-xs font-semibold tracking-widest uppercase bg-white/70 backdrop-blur-sm px-4 py-1.5 rounded-full border border-purple-200/50"
+            className="inline-block text-[var(--color-pill-text)] text-xs font-semibold tracking-widest uppercase bg-white/70 backdrop-blur-sm px-4 py-1.5 rounded-full border border-[var(--color-pill-border)]"
           >
-            Testimonials
+            Kundenstimmen
           </span>
         </div>
 
@@ -251,14 +253,25 @@ export const Testimonials: React.FC = () => {
               }}
             >
               <div className="bg-white rounded-3xl shadow-2xl px-8 sm:px-12 py-10 sm:py-14 text-center">
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 leading-relaxed font-medium mb-8">
+                <p className="text-lg sm:text-xl lg:text-2xl text-[var(--color-text-primary)] leading-relaxed font-medium mb-8">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
-                <div className="w-12 h-[2px] bg-purple-300 mx-auto mb-4 rounded-full" />
-                <p className="text-sm sm:text-base font-semibold text-gray-900">
+                {/* Hexagon divider instead of plain bar */}
+                <div className="flex items-center justify-center gap-1.5 mb-4">
+                  <svg width="10" height="12" viewBox="0 0 10 12" className="text-[var(--color-primary-400)]">
+                    <path d="M5 0L10 3L10 9L5 12L0 9L0 3Z" fill="currentColor"/>
+                  </svg>
+                  <svg width="10" height="12" viewBox="0 0 10 12" className="text-[var(--color-primary-500)]">
+                    <path d="M5 0L10 3L10 9L5 12L0 9L0 3Z" fill="currentColor"/>
+                  </svg>
+                  <svg width="10" height="12" viewBox="0 0 10 12" className="text-[var(--color-primary-400)]">
+                    <path d="M5 0L10 3L10 9L5 12L0 9L0 3Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <p className="text-sm sm:text-base font-semibold text-[var(--color-text-primary)]">
                   {testimonial.name}
                 </p>
-                <p className="text-sm text-gray-400">{testimonial.role}</p>
+                <p className="text-sm text-[var(--color-text-muted)]">{testimonial.role}</p>
               </div>
             </div>
           ))}

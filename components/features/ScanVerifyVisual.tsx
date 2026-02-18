@@ -42,14 +42,14 @@ export const ScanVerifyVisual: React.FC = () => {
           />
         </svg>
         <span className="text-white/90 text-xs font-semibold tracking-wide">
-          Verified
+          Verifiziert
         </span>
       </div>
 
       {/* "3/3 scanned" chip — bottom-right */}
       <div className="absolute bottom-8 right-4 bg-white/15 backdrop-blur-md rounded-full px-3 py-1 border border-white/20 shadow-md">
         <span className="text-white/80 text-[11px] font-medium">
-          3/3 scanned
+          3/3 gescannt
         </span>
       </div>
     </div>

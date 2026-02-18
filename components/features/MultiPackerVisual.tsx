@@ -3,7 +3,7 @@
 import React from "react";
 
 const AVATARS = [
-  { initial: "M", bg: "bg-purple-400" },
+  { initial: "M", bg: "bg-[var(--color-primary-500)]" },
   { initial: "S", bg: "bg-blue-400" },
   { initial: "A", bg: "bg-teal-400" },
   { initial: "L", bg: "bg-indigo-400" },
@@ -31,7 +31,7 @@ export const MultiPackerVisual: React.FC = () => {
           #20458
         </div>
         <div className="text-[11px] text-white/90 font-semibold">
-          Claimed by M
+          Beansprucht von M
         </div>
       </div>
 
@@ -43,7 +43,7 @@ export const MultiPackerVisual: React.FC = () => {
         <div className="flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
           <span className="text-[11px] text-white/80 font-medium">
-            Packing...
+            Wird gepackt...
           </span>
         </div>
       </div>
@@ -60,7 +60,7 @@ export const MultiPackerVisual: React.FC = () => {
         <div className="bg-white/15 backdrop-blur-md rounded-full px-3 py-1 border border-white/20 shadow-md flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
           <span className="text-white/80 text-[11px] font-medium">
-            4 packers online
+            4 Packer online
           </span>
         </div>
       </div>

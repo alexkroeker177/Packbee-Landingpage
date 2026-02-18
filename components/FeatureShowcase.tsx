@@ -4,17 +4,16 @@ import React, { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronRight } from "lucide-react";
+import { getCSSVar } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const COLOR_MUTED = "#D4CCE0";
-const COLOR_ACTIVE = "#A855F7";
 
 interface Feature {
   title: string;
   description: string;
   image: string;
   imageAlt: string;
+  linkText: string;
   reversed?: boolean;
 }
 
@@ -22,32 +21,37 @@ const features: Feature[] = [
   {
     title: "Dashboard",
     description:
-      "Get a real-time overview of your packing operations. Track orders, error rates, and team performance — all in one glance.",
+      "Echtzeit-Überblick über alle Packvorgänge. Bestellungen, Fehlerquoten und Team-Performance — alles auf einen Blick.",
     image: "/images/dashboard.png",
-    imageAlt: "PackBee Dashboard showing real-time packing metrics",
+    imageAlt: "PackBee Dashboard mit Echtzeit-Packmetriken",
+    linkText: "Mehr erfahren",
   },
   {
-    title: "Packing History",
+    title: "Packverlauf",
     description:
-      "Every order, every scan, every detail. Filter by packer, date, or status to find exactly what you need.",
+      "Jede Bestellung, jeder Scan, jedes Detail. Nach Packer, Datum oder Status filtern — alles lückenlos dokumentiert.",
     image: "/images/verlauf.png",
-    imageAlt: "PackBee detailed packing history with filtering",
+    imageAlt: "PackBee Packverlauf mit Filteroptionen",
+    linkText: "Mehr erfahren",
     reversed: true,
   },
 ];
 
-function FeatureCard({ title, description, image, imageAlt, reversed }: Feature) {
+function FeatureCard({ title, description, image, imageAlt, linkText, reversed }: Feature) {
   const cardRef = useRef<HTMLDivElement>(null);
   const charsRef = useRef<HTMLSpanElement[]>([]);
 
   useLayoutEffect(() => {
+    const mutedColor = getCSSVar("--color-heading-muted");
+    const activeColor = getCSSVar("--color-heading-active");
+
     const ctx = gsap.context(() => {
       // Animate heading letters
       gsap.fromTo(
         charsRef.current,
-        { color: COLOR_MUTED },
+        { color: mutedColor },
         {
-          color: COLOR_ACTIVE,
+          color: activeColor,
           stagger: 0.04,
           scrollTrigger: {
             trigger: cardRef.current,
@@ -90,7 +94,7 @@ function FeatureCard({ title, description, image, imageAlt, reversed }: Feature)
     >
       {/* Screenshot */}
       <div className="flex-1 w-full min-w-0">
-        <div className="rounded-2xl overflow-hidden bg-[#F8F7FA] border border-gray-100">
+        <div className="rounded-2xl overflow-hidden bg-[var(--color-surface-50)] border border-[var(--color-border)]">
           <img
             src={image}
             alt={imageAlt}
@@ -112,7 +116,7 @@ function FeatureCard({ title, description, image, imageAlt, reversed }: Feature)
                     ref={(el) => {
                       if (el) charsRef.current[idx] = el;
                     }}
-                    style={{ color: COLOR_MUTED }}
+                    style={{ color: "var(--color-heading-muted)" }}
                   >
                     {char}
                   </span>
@@ -122,14 +126,14 @@ function FeatureCard({ title, description, image, imageAlt, reversed }: Feature)
             </span>
           ))}
         </h3>
-        <p className="text-lg text-gray-500 leading-relaxed mb-8">
+        <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8">
           {description}
         </p>
         <a
           href="#"
-          className="inline-flex items-center text-lg font-semibold text-purple-500 hover:text-purple-600 transition-colors"
+          className="inline-flex items-center text-lg font-semibold text-[var(--color-primary-700)] hover:text-[var(--color-primary-800)] transition-colors"
         >
-          Learn more <ChevronRight className="ml-1" size={20} />
+          {linkText} <ChevronRight className="ml-1" size={20} />
         </a>
       </div>
     </div>
@@ -138,8 +142,9 @@ function FeatureCard({ title, description, image, imageAlt, reversed }: Feature)
 
 export const FeatureShowcase: React.FC = () => {
   return (
-    <section className="bg-[#F3F1F5] pb-32 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col gap-16 lg:gap-24">
+    <section className="relative bg-[var(--color-section-d)] pt-24 pb-32 px-6 md:px-12">
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.08] pointer-events-none" />
+      <div className="relative max-w-7xl mx-auto flex flex-col gap-16 lg:gap-24">
         {features.map((feature, idx) => (
           <FeatureCard key={idx} {...feature} />
         ))}

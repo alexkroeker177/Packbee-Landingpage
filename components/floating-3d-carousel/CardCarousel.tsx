@@ -46,14 +46,14 @@ function CarouselCardText({
       className="absolute top-0 space-y-2"
     >
       <div className="space-y-1">
-        <div className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900">
+        <div className="text-xl md:text-2xl font-extrabold tracking-tight text-white">
           {title}
         </div>
-        <div className="text-sm md:text-base font-semibold text-purple-500">
+        <div className="text-sm md:text-base font-semibold text-[var(--color-primary-400)]">
           {subtitle}
         </div>
       </div>
-      <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-md">
+      <p className="text-sm md:text-base text-white/60 leading-relaxed max-w-md">
         {description}
       </p>
     </motion.div>
@@ -71,14 +71,14 @@ function CarouselControls({
       <button
         aria-label="Previous"
         onClick={() => onChange(1)}
-        className="flex size-10 items-center justify-center rounded-full bg-purple-500 hover:bg-purple-600 text-white text-lg font-bold transition-colors shadow-md"
+        className="flex size-10 items-center justify-center rounded-full bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-400)] text-[#1C1510] text-lg font-bold transition-colors shadow-md shadow-amber-900/20"
       >
         &#8249;
       </button>
       <button
         aria-label="Next"
         onClick={() => onChange(-1)}
-        className="flex size-10 items-center justify-center rounded-full bg-purple-500 hover:bg-purple-600 text-white text-lg font-bold transition-colors shadow-md"
+        className="flex size-10 items-center justify-center rounded-full bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-400)] text-[#1C1510] text-lg font-bold transition-colors shadow-md shadow-amber-900/20"
       >
         &#8250;
       </button>

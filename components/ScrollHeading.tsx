@@ -3,24 +3,26 @@
 import React, { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getCSSVar } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HEADING_TEXT = "Capture and share your ideas at the speed of thought";
-const COLOR_MUTED = "#D4CCE0";
-const COLOR_ACTIVE = "#A855F7";
+const HEADING_TEXT = "Jede Sendung korrekt. Jeder Scan protokolliert. Null Fehler.";
 
 export const ScrollHeading: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const charsRef = useRef<HTMLSpanElement[]>([]);
 
   useLayoutEffect(() => {
+    const mutedColor = getCSSVar("--color-heading-muted");
+    const activeColor = getCSSVar("--color-heading-active");
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         charsRef.current,
-        { color: COLOR_MUTED },
+        { color: mutedColor },
         {
-          color: COLOR_ACTIVE,
+          color: activeColor,
           stagger: 0.03,
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -42,9 +44,10 @@ export const ScrollHeading: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#F3F1F5] py-32 md:py-44 px-6 md:px-12"
+      className="relative bg-[var(--color-section-a)] py-32 md:py-44 px-6 md:px-12"
     >
-      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold max-w-5xl mx-auto leading-[1.1] tracking-tight">
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.07] pointer-events-none" />
+      <h2 className="relative text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold max-w-5xl mx-auto leading-[1.1] tracking-tight">
         {words.map((word, wordIdx) => (
           <span key={wordIdx} className="inline-block whitespace-nowrap">
             {word.split("").map((char) => {
@@ -55,7 +58,7 @@ export const ScrollHeading: React.FC = () => {
                   ref={(el) => {
                     if (el) charsRef.current[idx] = el;
                   }}
-                  style={{ color: COLOR_MUTED }}
+                  style={{ color: "var(--color-heading-muted)" }}
                 >
                   {char}
                 </span>

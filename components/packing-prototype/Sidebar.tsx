@@ -12,10 +12,11 @@ export const Sidebar: React.FC = () => {
     <div className="hidden lg:flex w-[170px] bg-[#f8f9fb] border-r border-gray-200 flex-col shrink-0">
       {/* Logo */}
       <div className="h-12 px-4 flex items-center gap-2 border-b border-gray-200">
-        <div className="h-6 w-6 rounded-md bg-blue-600 flex items-center justify-center">
-          <Package className="h-3.5 w-3.5 text-white" />
-        </div>
-        <span className="font-bold text-[13px] text-slate-800">PackBee</span>
+        <img
+          src="/images/Packbee-Logo-Full-Black.svg"
+          alt="PackBee"
+          className="h-5 w-auto"
+        />
         <button className="ml-auto text-gray-400">
           <PanelLeftClose className="h-4 w-4" />
         </button>

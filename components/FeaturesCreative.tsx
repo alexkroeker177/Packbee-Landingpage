@@ -19,27 +19,27 @@ interface FeatureCard {
 
 const CARDS: FeatureCard[] = [
   {
-    title: "Scan to Verify",
+    title: "Scan-Verifikation",
     description:
-      "Every item gets scanned. Every order gets checked. Wrong shipments become impossible.",
+      "Jeder Artikel wird gescannt. Jede Bestellung wird geprüft. Falsche Sendungen werden unmöglich.",
     visual: <ScanVerifyVisual />,
-    blobColors: ["#A855F7", "#7C3AED", "#C084FC"],
+    blobColors: ["var(--color-blob-1-a)", "var(--color-blob-1-b)", "var(--color-blob-1-c)"],
     blobAnimClass: "animate-[blob-morph-1_8s_ease-in-out_infinite]",
   },
   {
-    title: "No Scan, No Label",
+    title: "Kein Scan, kein Label",
     description:
-      "Labels stay locked until every item is verified. Incomplete orders can't ship — period.",
+      "Labels bleiben gesperrt, bis jeder Artikel verifiziert ist. Unvollständige Bestellungen können nicht versendet werden.",
     visual: <NoScanNoLabelVisual />,
-    blobColors: ["#F59E0B", "#EF4444", "#FCD34D"],
+    blobColors: ["var(--color-blob-2-a)", "var(--color-blob-2-b)", "var(--color-blob-2-c)"],
     blobAnimClass: "animate-[blob-morph-2_10s_ease-in-out_infinite]",
   },
   {
-    title: "Pack as a Team",
+    title: "Im Team packen",
     description:
-      "See who's packing what in real-time. Claim orders, track progress, and scale your fulfillment crew.",
+      "Echtzeit-Überblick: Wer packt was? Bestellungen beanspruchen, Fortschritt verfolgen und das Fulfillment-Team skalieren.",
     visual: <MultiPackerVisual />,
-    blobColors: ["#06B6D4", "#3B82F6", "#22D3EE"],
+    blobColors: ["var(--color-blob-3-a)", "var(--color-blob-3-b)", "var(--color-blob-3-c)"],
     blobAnimClass: "animate-[blob-morph-3_12s_ease-in-out_infinite]",
   },
 ];
@@ -118,15 +118,16 @@ export const FeaturesCreative: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white py-24 sm:py-32 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="funktionen" ref={sectionRef} className="relative bg-white py-24 sm:py-32 px-6 md:px-12">
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.04] pointer-events-none" />
+      <div className="relative max-w-7xl mx-auto">
         {/* Section header */}
         <div ref={headerRef} className="text-center mb-16 sm:mb-20">
-          <span className="inline-block text-purple-600 text-xs font-semibold tracking-widest uppercase bg-purple-50 px-4 py-1.5 rounded-full mb-6 border border-purple-100">
-            Features
+          <span className="inline-block text-[var(--color-pill-text)] text-xs font-semibold tracking-widest uppercase bg-[var(--color-pill-bg)] backdrop-blur-sm px-4 py-1.5 rounded-full mb-6 border border-[var(--color-pill-border)]">
+            Funktionen
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-[1.1]">
-            Scan it. Ship it. Trust it.
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--color-text-primary)] leading-[1.1]">
+            Scannen. Prüfen. Versenden.
           </h2>
         </div>
 
@@ -202,10 +203,10 @@ export const FeaturesCreative: React.FC = () => {
               </div>
 
               {/* Text content */}
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-[var(--color-text-primary)] mb-2">
                 {card.title}
               </h3>
-              <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--color-text-secondary)] text-sm sm:text-base leading-relaxed">
                 {card.description}
               </p>
             </div>

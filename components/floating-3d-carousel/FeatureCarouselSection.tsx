@@ -5,54 +5,52 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CardCarousel } from "./CardCarousel";
 import { CarouselFeature } from "./types";
+import { getCSSVar } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COLOR_MUTED = "#D4CCE0";
-const COLOR_ACTIVE = "#A855F7";
-
-const HEADING_TEXT = "See PackBee in Action";
+const HEADING_TEXT = "PackBee in Aktion";
 
 const features: CarouselFeature[] = [
   {
     src: "/images/dashboard.png",
-    alt: "PackBee Dashboard showing real-time packing metrics",
+    alt: "PackBee Dashboard mit Echtzeit-Packmetriken",
     title: "Dashboard",
-    subtitle: "Real-Time Overview",
+    subtitle: "Echtzeit-Überblick",
     description:
-      "Get a live view of your packing operations. Track orders, error rates, and team performance — all in one glance.",
+      "Live-Ansicht aller Packvorgänge. Bestellungen, Fehlerquoten und Team-Performance auf einen Blick.",
   },
   {
     src: "/images/verlauf.png",
-    alt: "PackBee detailed packing history with filtering",
-    title: "Packing History",
-    subtitle: "Full Audit Trail",
+    alt: "PackBee Packverlauf mit Filteroptionen",
+    title: "Packverlauf",
+    subtitle: "Lückenlose Dokumentation",
     description:
-      "Every order, every scan, every detail. Filter by packer, date, or status to find exactly what you need.",
+      "Jede Bestellung, jeder Scan, jedes Detail. Nach Packer, Datum oder Status filtern.",
   },
   {
     src: "https://picsum.photos/seed/packbee-analytics/960/600",
-    alt: "Analytics dashboard with charts and reports",
-    title: "Analytics & Reports",
-    subtitle: "Data-Driven Insights",
+    alt: "Analyse-Dashboard mit Diagrammen und Berichten",
+    title: "Analysen & Berichte",
+    subtitle: "Datenbasierte Einblicke",
     description:
-      "Understand your fulfillment performance with detailed charts, trends, and exportable reports.",
+      "Fulfillment-Performance verstehen mit detaillierten Diagrammen, Trends und exportierbaren Berichten.",
   },
   {
     src: "https://picsum.photos/seed/packbee-team/960/600",
-    alt: "Team management interface showing packer assignments",
-    title: "Team Management",
-    subtitle: "Organize Your Crew",
+    alt: "Team-Verwaltung mit Packer-Zuweisungen",
+    title: "Team-Verwaltung",
+    subtitle: "Team organisieren",
     description:
-      "Assign roles, monitor individual packer stats, and keep your warehouse team running smoothly.",
+      "Rollen zuweisen, individuelle Packer-Statistiken überwachen und das Warehouse-Team effizient steuern.",
   },
   {
     src: "https://picsum.photos/seed/packbee-channels/960/600",
-    alt: "Multi-channel fulfillment view with unified orders",
+    alt: "Multi-Channel-Fulfillment mit einheitlicher Bestellübersicht",
     title: "Multi-Channel",
-    subtitle: "Unified Fulfillment",
+    subtitle: "Einheitliches Fulfillment",
     description:
-      "Consolidate orders from every sales channel into one packing workflow. No more switching between platforms.",
+      "Bestellungen aus allen Verkaufskanälen in einem Packworkflow zusammenführen. Kein Plattformwechsel mehr.",
   },
 ];
 
@@ -62,6 +60,10 @@ export const FeatureCarouselSection: React.FC = () => {
   const pillRef = useRef<HTMLSpanElement>(null);
 
   useLayoutEffect(() => {
+    // Dark section: muted warm gray → bright amber gold
+    const mutedColor = "rgba(255, 255, 255, 0.25)";
+    const activeColor = getCSSVar("--color-primary-400") || "#FBBF24";
+
     const ctx = gsap.context(() => {
       // Animate pill badge
       if (pillRef.current) {
@@ -81,12 +83,12 @@ export const FeatureCarouselSection: React.FC = () => {
         );
       }
 
-      // Animate heading letters
+      // Animate heading letters: ghostly white → glowing amber
       gsap.fromTo(
         charsRef.current,
-        { color: COLOR_MUTED },
+        { color: mutedColor },
         {
-          color: COLOR_ACTIVE,
+          color: activeColor,
           stagger: 0.04,
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -107,18 +109,29 @@ export const FeatureCarouselSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#F3F1F5] pt-24 pb-20 px-6 md:px-12"
+      className="relative bg-[#1C1510] pt-24 pb-20 px-6 md:px-12 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto flex flex-col items-center">
-        {/* Features pill */}
+      {/* Amber honeycomb on dark — the signature look */}
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.08] pointer-events-none" />
+
+      {/* Subtle amber radial glow behind the carousel */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 50% at 50% 60%, rgba(245, 158, 11, 0.08), transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto flex flex-col items-center">
+        {/* Features pill — amber accent on dark */}
         <span
           ref={pillRef}
-          className="inline-block text-purple-600 text-xs font-semibold tracking-widest uppercase bg-white/70 backdrop-blur-sm px-4 py-1.5 rounded-full border border-purple-200/50 mb-6"
+          className="inline-block text-[var(--color-primary-400)] text-xs font-semibold tracking-widest uppercase bg-[var(--color-primary-400)]/10 backdrop-blur-sm px-4 py-1.5 rounded-full border border-[var(--color-primary-400)]/20 mb-6"
         >
-          Features
+          Funktionen
         </span>
 
-        {/* Animated heading */}
+        {/* Animated heading — ghost white reveals to amber gold */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight text-center mb-8">
           {words.map((word, wordIdx) => (
             <span key={wordIdx} className="inline-block whitespace-nowrap">
@@ -130,7 +143,7 @@ export const FeatureCarouselSection: React.FC = () => {
                     ref={(el) => {
                       if (el) charsRef.current[idx] = el;
                     }}
-                    style={{ color: COLOR_MUTED }}
+                    style={{ color: "rgba(255, 255, 255, 0.25)" }}
                   >
                     {char}
                   </span>

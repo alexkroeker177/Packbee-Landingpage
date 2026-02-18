@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, ArrowRight, X } from 'lucide-react';
+import { Menu, ArrowRight, X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,44 +21,37 @@ export const Navbar: React.FC = () => {
         <div className="h-[64px] flex items-center justify-between">
           <div className="flex items-center gap-3 pl-2">
 
-            {/* Logo Section */}
-            <a href="#" className="flex items-center gap-2 group mr-1">
-               {/* Custom Logo Icon - Overlapping Diamonds */}
-               <div className="relative w-6 h-6 flex items-center justify-center">
-                  <div className="absolute w-[16px] h-[16px] bg-[#A855F7] rounded-[2px] transform rotate-45 -translate-x-[3px] translate-y-[0px]"></div>
-                  <div className="absolute w-[16px] h-[16px] bg-[#E9D5FF] rounded-[2px] transform rotate-45 translate-x-[3px] translate-y-[0px] mix-blend-multiply"></div>
-               </div>
-
-              <div className="flex items-center gap-1">
-                  <span className="text-[18px] font-bold tracking-tight text-[#1A1A1A]">
-                  Whimsical
-                  </span>
-                  <ChevronDown size={14} strokeWidth={3} className="text-gray-500/70 mt-[2px]" />
-              </div>
+            {/* PackBee Logo */}
+            <a href="#" className="flex items-center group mr-1">
+              <img
+                src="/images/Packbee-Logo-Full-Black.svg"
+                alt="PackBee"
+                className="h-7 w-auto"
+              />
             </a>
 
             {/* Divider */}
             <div className="hidden md:block h-5 w-px bg-gray-400/20 mx-1"></div>
 
             {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center gap-0.5 text-[15px] font-medium text-[#404040]">
-              <button className="flex items-center gap-1 hover:text-black hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">
-                Product <ChevronDown size={14} strokeWidth={2} className="text-gray-400" />
-              </button>
-              <button className="flex items-center gap-1 hover:text-black hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">
-                Resources <ChevronDown size={14} strokeWidth={2} className="text-gray-400" />
-              </button>
-              <a href="#" className="hover:text-black hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">Pricing</a>
+            <div className="hidden md:flex items-center gap-0.5 text-[15px] font-medium text-[var(--color-text-secondary)]">
+              <a href="#funktionen" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">
+                Produkt
+              </a>
+              <a href="#" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">
+                Ressourcen
+              </a>
+              <a href="#" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">Preise</a>
             </div>
           </div>
 
           {/* Right Actions (Desktop) */}
           <div className="hidden md:flex items-center gap-2 pr-1">
-            <a href="#" className="text-[15px] font-medium text-[#1A1A1A] hover:text-purple-600 px-4 transition-colors">
-                Contact sales
+            <a href="#" className="text-[15px] font-medium text-[var(--color-text-primary)] hover:text-[var(--color-primary-700)] px-4 transition-colors">
+                Kontakt
             </a>
-            <a href="#" className="text-[15px] font-medium text-white bg-[#2E1D38] px-5 py-2.5 rounded-lg flex items-center gap-2 hover:bg-black transition-colors group shadow-sm">
-              To App
+            <a href="#" className="text-[15px] font-medium text-white bg-[var(--color-cta-dark)] px-5 py-2.5 rounded-lg flex items-center gap-2 hover:bg-black transition-colors group shadow-sm">
+              Zur App
               <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
@@ -81,40 +74,40 @@ export const Navbar: React.FC = () => {
         >
           <div className="border-t border-gray-200/50 px-2 pt-3 pb-4 flex flex-col gap-1">
             <a
-              href="#"
+              href="#funktionen"
               onClick={() => setIsMenuOpen(false)}
-              className="text-[15px] font-medium text-[#404040] hover:text-black hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
+              className="text-[15px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
             >
-              Product
+              Produkt
             </a>
             <a
               href="#"
               onClick={() => setIsMenuOpen(false)}
-              className="text-[15px] font-medium text-[#404040] hover:text-black hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
+              className="text-[15px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
             >
-              Resources
+              Ressourcen
             </a>
             <a
               href="#"
               onClick={() => setIsMenuOpen(false)}
-              className="text-[15px] font-medium text-[#404040] hover:text-black hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
+              className="text-[15px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
             >
-              Pricing
+              Preise
             </a>
             <div className="h-px bg-gray-200/50 my-1" />
             <a
               href="#"
               onClick={() => setIsMenuOpen(false)}
-              className="text-[15px] font-medium text-[#1A1A1A] hover:text-purple-600 px-3 py-2.5 rounded-lg transition-colors"
+              className="text-[15px] font-medium text-[var(--color-text-primary)] hover:text-[var(--color-primary-700)] px-3 py-2.5 rounded-lg transition-colors"
             >
-              Contact sales
+              Kontakt
             </a>
             <a
               href="#"
               onClick={() => setIsMenuOpen(false)}
-              className="text-[15px] font-medium text-white bg-[#2E1D38] px-3 py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-black transition-colors"
+              className="text-[15px] font-medium text-white bg-[var(--color-cta-dark)] px-3 py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-black transition-colors"
             >
-              To App
+              Zur App
               <ArrowRight size={16} />
             </a>
           </div>

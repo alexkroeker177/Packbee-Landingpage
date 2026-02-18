@@ -1,8 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
 import {
   User,
   MapPin,
-  Truck,
   CheckCircle,
   PackageCheck,
   Copy,
@@ -12,6 +13,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
+import type { Address } from "./PackingPrototype";
 
 interface OrderInfoPanelProps {
   customerName: string;
@@ -25,7 +27,14 @@ interface OrderInfoPanelProps {
   isComplete: boolean;
   isFinalized: boolean;
   onFinalize: () => void;
+  address: Address;
+  selectedPrinter: string;
+  onPrinterChange: (printer: string) => void;
+  onOpenAddressDialog: () => void;
 }
+
+const PRINTER_OPTIONS = ["Alpha Drucker", "Beta Drucker"];
+const SHIPPING_OPTIONS = ["DHL - DHL Paket", "Hermes - Hermes Paket"];
 
 export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
   customerName,
@@ -39,7 +48,33 @@ export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
   isComplete,
   isFinalized,
   onFinalize,
+  address,
+  selectedPrinter,
+  onPrinterChange,
+  onOpenAddressDialog,
 }) => {
+  const [isPrinterOpen, setIsPrinterOpen] = useState(false);
+  const [isShippingOpen, setIsShippingOpen] = useState(false);
+  const [selectedShipping, setSelectedShipping] = useState("DHL - DHL Paket");
+  const [weight, setWeight] = useState("100");
+  const printerRef = useRef<HTMLDivElement>(null);
+  const shippingRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    if (!isPrinterOpen && !isShippingOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (isPrinterOpen && printerRef.current && !printerRef.current.contains(e.target as Node)) {
+        setIsPrinterOpen(false);
+      }
+      if (isShippingOpen && shippingRef.current && !shippingRef.current.contains(e.target as Node)) {
+        setIsShippingOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [isPrinterOpen, isShippingOpen]);
+
   return (
     <div className="w-full md:w-[300px] lg:w-[340px] flex flex-col border-t md:border-t-0 md:border-l border-gray-200 bg-white shrink-0 overflow-hidden">
       <div className="flex-1 overflow-y-auto">
@@ -98,16 +133,23 @@ export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
             <MapPin size={14} className="text-gray-400 mt-0.5 shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-[12px] font-semibold text-slate-800">
-                {customerName}
+                {address.firstName} {address.lastName}
               </p>
-              <p className="text-[11px] text-gray-500">Musterstraße 1c</p>
-              <p className="text-[11px] text-gray-500">10115 Berlin, DE</p>
+              <p className="text-[11px] text-gray-500">
+                {address.street} {address.houseNumber}
+              </p>
+              <p className="text-[11px] text-gray-500">
+                {address.zip} {address.city}, {address.country}
+              </p>
             </div>
             <div className="flex gap-1">
               <button className="p-1 text-gray-400 hover:text-gray-600 cursor-default">
                 <Copy size={12} />
               </button>
-              <button className="p-1 text-gray-400 hover:text-gray-600 cursor-default">
+              <button
+                onClick={onOpenAddressDialog}
+                className="p-1 text-gray-400 hover:text-gray-600 cursor-pointer"
+              >
                 <Pencil size={12} />
               </button>
             </div>
@@ -127,9 +169,37 @@ export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
           <div className="mb-3">
             <p className="text-[10px] text-gray-400 mb-1">Drucker</p>
             <div className="flex items-center gap-1.5">
-              <div className="flex-1 border border-gray-200 rounded-lg px-3 py-1.5 text-[11px] text-gray-500 flex items-center justify-between">
-                <span>Nicht festgelegt</span>
-                <ChevronDown size={12} className="text-gray-300" />
+              <div className="relative flex-1" ref={printerRef}>
+                <button
+                  onClick={() => setIsPrinterOpen((prev) => !prev)}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-[11px] text-slate-700 flex items-center justify-between cursor-pointer hover:border-gray-300 transition-colors"
+                >
+                  <span>{selectedPrinter}</span>
+                  <ChevronDown
+                    size={12}
+                    className={`text-gray-300 transition-transform ${isPrinterOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {isPrinterOpen && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 overflow-hidden">
+                    {PRINTER_OPTIONS.map((printer) => (
+                      <button
+                        key={printer}
+                        onClick={() => {
+                          onPrinterChange(printer);
+                          setIsPrinterOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-2 text-[11px] hover:bg-gray-50 transition-colors ${
+                          printer === selectedPrinter
+                            ? "text-blue-600 font-medium bg-blue-50"
+                            : "text-slate-700"
+                        }`}
+                      >
+                        {printer}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <button className="p-1 text-gray-400 cursor-default">
                 <RefreshCw size={12} />
@@ -144,9 +214,37 @@ export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
               <div>
                 <p className="text-[9px] text-gray-400 mb-0.5">Versandart</p>
                 <div className="flex items-center gap-1.5">
-                  <div className="flex-1 border border-gray-200 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-700 flex items-center justify-between">
-                    <span>DHL - DHL Paket</span>
-                    <ChevronDown size={12} className="text-gray-300" />
+                  <div className="relative flex-1" ref={shippingRef}>
+                    <button
+                      onClick={() => setIsShippingOpen((prev) => !prev)}
+                      className="w-full border border-gray-200 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-700 flex items-center justify-between cursor-pointer hover:border-gray-300 transition-colors"
+                    >
+                      <span className="truncate">{selectedShipping}</span>
+                      <ChevronDown
+                        size={12}
+                        className={`text-gray-300 shrink-0 transition-transform ${isShippingOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {isShippingOpen && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 overflow-hidden">
+                        {SHIPPING_OPTIONS.map((option) => (
+                          <button
+                            key={option}
+                            onClick={() => {
+                              setSelectedShipping(option);
+                              setIsShippingOpen(false);
+                            }}
+                            className={`w-full text-left px-3 py-2 text-[11px] hover:bg-gray-50 transition-colors ${
+                              option === selectedShipping
+                                ? "text-blue-600 font-medium bg-blue-50"
+                                : "text-slate-700"
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <button className="p-1 text-gray-400 cursor-default">
                     <RefreshCw size={10} />
@@ -155,9 +253,14 @@ export const OrderInfoPanel: React.FC<OrderInfoPanelProps> = ({
               </div>
               <div>
                 <p className="text-[9px] text-gray-400 mb-0.5">Gewicht</p>
-                <div className="border border-gray-200 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-700 flex items-center justify-between">
-                  <span>113.04</span>
-                  <span className="text-gray-400 text-[10px]">kg</span>
+                <div className="border border-gray-200 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-700 flex items-center gap-1">
+                  <input
+                    type="text"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                    className="w-full bg-transparent text-[11px] text-slate-700 focus:outline-none"
+                  />
+                  <span className="text-gray-400 text-[10px] shrink-0">kg</span>
                 </div>
               </div>
             </div>
