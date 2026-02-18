@@ -12,7 +12,7 @@ This milestone embeds Payload CMS 3.x into the existing PackBee Next.js 16 landi
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Infrastructure** - Embed Payload CMS safely in the existing Next.js app without breaking the landing page
+- [x] **Phase 1: Infrastructure** - Embed Payload CMS safely in the existing Next.js app without breaking the landing page
 - [ ] **Phase 2: Content Model** - Define all collections, editorial workflow, and SEO fields so authors can create content in the admin panel
 - [ ] **Phase 3: Frontend & SEO** - Build all public-facing routes with full SEO instrumentation so the site is indexable and live
 
@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Route group restructure, Payload 3.77.0 install, and (payload) route group boilerplate
-- [ ] 01-02-PLAN.md — Supabase database connection, initial migration, media uploads, and admin login
+- [x] 01-02-PLAN.md — Supabase database connection, initial migration, media uploads, and admin login
 
 ---
 
@@ -89,6 +89,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure | 1/2 | In progress | - |
+| 1. Infrastructure | 2/2 | Complete | 2026-02-18 |
 | 2. Content Model | 0/2 | Not started | - |
 | 3. Frontend & SEO | 0/3 | Not started | - |
