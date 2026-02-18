@@ -31,11 +31,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 4. Schema changes are tracked as migration files in `src/migrations/` — `push: true` is disabled
 5. A media upload submitted through the admin panel saves to local filesystem without errors
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Route group restructure and Payload install
-- [ ] 01-02: Database connection, migrations, and media storage
+- [ ] 01-01-PLAN.md — Route group restructure, Payload 3.77.0 install, and (payload) route group boilerplate
+- [ ] 01-02-PLAN.md — Supabase database connection, initial migration, media uploads, and admin login
 
 ---
 
