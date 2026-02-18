@@ -106,6 +106,7 @@ export default async function HelpListingPage({ searchParams }: { searchParams: 
           and: [
             { section: { equals: section.id } },
             { _status: { equals: 'published' } },
+            { 'meta.noIndex': { not_equals: true } },
           ],
         },
         overrideAccess: false,

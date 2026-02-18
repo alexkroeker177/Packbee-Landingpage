@@ -23,7 +23,12 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
     limit: 10,
     page: currentPage,
     overrideAccess: false,
-    where: { _status: { equals: 'published' } },
+    where: {
+      and: [
+        { _status: { equals: 'published' } },
+        { 'meta.noIndex': { not_equals: true } },
+      ],
+    },
     select: {
       title: true,
       slug: true,
