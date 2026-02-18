@@ -53,5 +53,37 @@ export const KnowledgeBase: CollectionConfig = {
       type: 'richText',
       editor: lexicalEditor(),
     },
+    {
+      name: 'excerpt',
+      type: 'textarea',
+      admin: {
+        description: 'Short summary displayed in search results and used as meta description fallback.',
+      },
+    },
+    {
+      name: 'articleType',
+      type: 'select',
+      defaultValue: 'standard',
+      options: [
+        { label: 'Standard Article', value: 'standard' },
+        { label: 'FAQ Article (FAQPage schema)', value: 'faq' },
+      ],
+      admin: {
+        description: 'Controls structured data (JSON-LD) schema type emitted for search engines.',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'faqs',
+      type: 'array',
+      admin: {
+        description: 'Question and answer pairs for FAQPage structured data. Only used when Article Type is FAQ.',
+        condition: (data) => data?.articleType === 'faq',
+      },
+      fields: [
+        { name: 'question', type: 'text', required: true },
+        { name: 'answer', type: 'textarea', required: true },
+      ],
+    },
   ],
 }

@@ -77,5 +77,30 @@ export const Posts: CollectionConfig = {
         date: { pickerAppearance: 'dayAndTime' },
       },
     },
+    {
+      name: 'contentType',
+      type: 'select',
+      defaultValue: 'article',
+      options: [
+        { label: 'Article (standard)', value: 'article' },
+        { label: 'Tutorial (HowTo schema)', value: 'tutorial' },
+      ],
+      admin: {
+        description: 'Controls structured data (JSON-LD) schema type emitted for search engines.',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'steps',
+      type: 'array',
+      admin: {
+        description: 'Step-by-step instructions for HowTo structured data. Only used when Content Type is Tutorial.',
+        condition: (data) => data?.contentType === 'tutorial',
+      },
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'description', type: 'textarea', required: true },
+      ],
+    },
   ],
 }

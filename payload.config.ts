@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { searchPlugin } from '@payloadcms/plugin-search'
 import sharp from 'sharp'
 
 import { Media } from './src/collections/Media'
@@ -79,6 +80,25 @@ export default buildConfig({
           },
         },
       ],
+    }),
+    searchPlugin({
+      collections: ['knowledge-base'],
+      defaultPriorities: {
+        'knowledge-base': 10,
+      },
+      searchOverrides: {
+        slug: 'search',
+        fields: ({ defaultFields }) => [
+          ...defaultFields,
+          { name: 'excerpt', type: 'textarea' },
+          { name: 'section', type: 'relationship', relationTo: 'sections' },
+        ],
+      },
+      beforeSync: ({ originalDoc, searchDoc }) => ({
+        ...searchDoc,
+        excerpt: (originalDoc as Record<string, unknown>)?.excerpt ?? '',
+        section: (originalDoc as Record<string, unknown>)?.section,
+      }),
     }),
   ],
   jobs: {

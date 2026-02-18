@@ -74,6 +74,7 @@ export interface Config {
     sections: Section;
     posts: Post;
     'knowledge-base': KnowledgeBase;
+    search: Search;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -89,6 +90,7 @@ export interface Config {
     sections: SectionsSelect<false> | SectionsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
+    search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -256,6 +258,20 @@ export interface Post {
   categories?: (number | Category)[] | null;
   tags?: string[] | null;
   publishedAt?: string | null;
+  /**
+   * Controls structured data (JSON-LD) schema type emitted for search engines.
+   */
+  contentType?: ('article' | 'tutorial') | null;
+  /**
+   * Step-by-step instructions for HowTo structured data. Only used when Content Type is Tutorial.
+   */
+  steps?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -311,6 +327,24 @@ export interface KnowledgeBase {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Short summary displayed in search results and used as meta description fallback.
+   */
+  excerpt?: string | null;
+  /**
+   * Controls structured data (JSON-LD) schema type emitted for search engines.
+   */
+  articleType?: ('standard' | 'faq') | null;
+  /**
+   * Question and answer pairs for FAQPage structured data. Only used when Article Type is FAQ.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -334,6 +368,25 @@ export interface KnowledgeBase {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search".
+ */
+export interface Search {
+  id: number;
+  title?: string | null;
+  priority?: number | null;
+  doc: {
+    relationTo: 'knowledge-base';
+    value: number | KnowledgeBase;
+  };
+  excerpt?: string | null;
+  section?: (number | null) | Section;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -478,6 +531,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'knowledge-base';
         value: number | KnowledgeBase;
+      } | null)
+    | ({
+        relationTo: 'search';
+        value: number | Search;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -611,6 +668,14 @@ export interface PostsSelect<T extends boolean = true> {
   categories?: T;
   tags?: T;
   publishedAt?: T;
+  contentType?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   meta?:
     | T
     | {
@@ -635,6 +700,15 @@ export interface KnowledgeBaseSelect<T extends boolean = true> {
   slug?: T;
   section?: T;
   body?: T;
+  excerpt?: T;
+  articleType?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   meta?:
     | T
     | {
@@ -648,6 +722,19 @@ export interface KnowledgeBaseSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search_select".
+ */
+export interface SearchSelect<T extends boolean = true> {
+  title?: T;
+  priority?: T;
+  doc?: T;
+  excerpt?: T;
+  section?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
