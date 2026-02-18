@@ -52,11 +52,11 @@ Plans:
 4. A previously published post can be previewed live in the admin panel before changes are republished
 5. A post can be scheduled for future publishing and the admin panel shows the scheduled time
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Supporting collections (Media, Authors, Categories) and Posts collection
-- [ ] 02-02: KB Articles collection, plugins (SEO, nested-docs, search), and editorial workflow
+- [ ] 02-01-PLAN.md — Supporting collections (Authors, Categories, Sections), Posts collection with editorial workflow, SEO plugin, jobs config, and migration
+- [ ] 02-02-PLAN.md — KnowledgeBase collection with section grouping, migration, and admin panel verification
 
 ---
 
