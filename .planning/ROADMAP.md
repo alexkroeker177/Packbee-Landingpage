@@ -13,7 +13,7 @@ This milestone embeds Payload CMS 3.x into the existing PackBee Next.js 16 landi
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Infrastructure** - Embed Payload CMS safely in the existing Next.js app without breaking the landing page
-- [ ] **Phase 2: Content Model** - Define all collections, editorial workflow, and SEO fields so authors can create content in the admin panel
+- [x] **Phase 2: Content Model** - Define all collections, editorial workflow, and SEO fields so authors can create content in the admin panel
 - [ ] **Phase 3: Frontend & SEO** - Build all public-facing routes with full SEO instrumentation so the site is indexable and live
 
 ## Phase Details
@@ -55,8 +55,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Supporting collections (Authors, Categories, Sections), Posts collection with editorial workflow, SEO plugin, jobs config, and migration
-- [ ] 02-02-PLAN.md — KnowledgeBase collection with section grouping, migration, and admin panel verification
+- [x] 02-01-PLAN.md — Supporting collections (Authors, Categories, Sections), Posts collection with editorial workflow, SEO plugin, jobs config, and migration
+- [x] 02-02-PLAN.md — KnowledgeBase collection with section grouping, migration, and admin panel verification
 
 ---
 
@@ -90,5 +90,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure | 2/2 | Complete | 2026-02-18 |
-| 2. Content Model | 0/2 | Not started | - |
+| 2. Content Model | 2/2 | Complete | 2026-02-18 |
 | 3. Frontend & SEO | 0/3 | Not started | - |
