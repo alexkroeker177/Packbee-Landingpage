@@ -18,7 +18,7 @@ export const Sections: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    ...slugField(),
+    slugField(),
     {
       name: 'description',
       type: 'textarea',
