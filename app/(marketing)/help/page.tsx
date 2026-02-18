@@ -63,10 +63,9 @@ export default async function HelpListingPage({ searchParams }: { searchParams: 
           <ul>
             {results.docs.map((result) => {
               const slug =
-                result.slug ??
-                (typeof result.doc?.value === 'object' && result.doc.value !== null
+                typeof result.doc?.value === 'object' && result.doc.value !== null
                   ? (result.doc.value as { slug?: string }).slug
-                  : undefined)
+                  : undefined
               return (
                 <li key={result.id} className="py-3 border-b last:border-b-0">
                   {slug ? (
