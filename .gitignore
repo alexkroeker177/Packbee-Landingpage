@@ -27,3 +27,7 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Payload media uploads (local filesystem)
+media/*
+!media/.gitkeep
