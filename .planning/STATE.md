@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Drive organic traffic to PackBee through SEO-optimized blog content and provide a self-serve knowledge base for customers and prospects.
-**Current focus:** Phase 3 in progress — blog pages and sitemap complete, ready for KB/help pages
+**Current focus:** Phase 3 complete — all pages, sitemap, robots.txt, and KB routes delivered
 
 ## Current Position
 
-Phase: 3 of 3 (Frontend & SEO) — In progress
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-18 — Completed 03-02 (blog listing, blog post, sitemap, robots.txt)
+Phase: 3 of 3 (Frontend & SEO) — Complete
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-18 — Completed 03-03 (KB listing page, KB article/section page with disambiguation + FAQPage JSON-LD)
 
-Progress: [█████████░] 90%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 9 min
-- Total execution time: 56 min
+- Total plans completed: 7
+- Average duration: 8 min
+- Total execution time: 58 min
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [█████████░] 90%
 |-------|-------|-------|----------|
 | 1 | 2/2 | 33 min | 17 min |
 | 2 | 2/2 | 18 min | 9 min |
-| 3 | 2/3 | 5 min | 3 min |
+| 3 | 3/3 | 7 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (14 min), 02-02 (4 min), 03-01 (4 min), 03-02 (1 min)
-- Trend: Accelerating
+- Last 5 plans: 02-02 (4 min), 03-01 (4 min), 03-02 (1 min), 03-03 (2 min)
+- Trend: Fast and consistent
 
 *Updated after each plan completion*
 
@@ -61,18 +61,21 @@ Recent decisions affecting current work:
 - [03-02]: `React.cache()` wraps `queryPostBySlug` to deduplicate Payload queries between generateMetadata and page render
 - [03-02]: `app/sitemap.ts` must be at app root (not inside route group) to serve correctly at /sitemap.xml
 - [03-02]: Import path for cache-tags from app/sitemap.ts is `../src/lib/cache-tags` (app/ is sibling to src/)
+- [03-03]: DB disambiguation for /help/[slug] — section lookup runs first; section slugs take priority over article slugs
+- [03-03]: Search type from payload-types.ts has no `slug` field — slug is at `result.doc.value.slug` (on the populated KnowledgeBase document)
+- [03-03]: `overrideAccess: false` required on all KB article queries — public visitors must not see draft articles
 
 ### Pending Todos
 
-None yet.
+None.
 
 ### Blockers/Concerns
 
-- Phase 3: `convertLexicalToHTML()` import path for Payload 3.73+ should be verified at implementation time (marked MEDIUM confidence in research) — use `/html` path: `import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'`
-- Phase 3: `NEXT_PUBLIC_SERVER_URL` env var needed for live preview URLs in Posts and KnowledgeBase collections
+- `NEXT_PUBLIC_SERVER_URL` env var needed for live preview URLs in Posts and KnowledgeBase collections (set before deploying to production)
+- Design pass is deferred — all pages use minimal Tailwind for structure only
 
 ## Session Continuity
 
 Last session: 2026-02-18
-Stopped at: Completed 03-02-PLAN.md — blog listing, blog post, sitemap, robots.txt
+Stopped at: Completed 03-03-PLAN.md — KB listing page, KB article/section page, all phase 3 plans complete
 Resume file: None
