@@ -73,12 +73,12 @@ Plans:
 4. The XML sitemap at `/sitemap.xml` includes all published, non-noIndex blog posts and KB articles — `/admin` is blocked in `robots.txt`
 5. Publishing or updating any post or article in the admin panel causes its public page to update without a full site rebuild (on-demand revalidation)
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Blog pages (`/blog`, `/blog/[slug]`) with Article JSON-LD and author bio
-- [ ] 03-02: KB pages (`/help`, `/help/[slug]`, `/help/[section-slug]`) with breadcrumbs and FAQPage schema
-- [ ] 03-03: Sitemap, robots.txt, HowTo schema, and on-demand revalidation
+- [ ] 03-01-PLAN.md — Schema updates (contentType, articleType, steps[], faqs[]), search plugin, revalidation hooks, and migration
+- [ ] 03-02-PLAN.md — Blog pages (/blog, /blog/[slug]) with Article/HowTo JSON-LD, author bio, sitemap.ts, and robots.ts
+- [ ] 03-03-PLAN.md — KB pages (/help, /help/[slug]) with section grouping, search, breadcrumbs, and FAQPage JSON-LD
 
 ---
 
