@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Infrastructure** - Embed Payload CMS safely in the existing Next.js app without breaking the landing page
 - [x] **Phase 2: Content Model** - Define all collections, editorial workflow, and SEO fields so authors can create content in the admin panel
-- [ ] **Phase 3: Frontend & SEO** - Build all public-facing routes with full SEO instrumentation so the site is indexable and live
+- [x] **Phase 3: Frontend & SEO** - Build all public-facing routes with full SEO instrumentation so the site is indexable and live
 
 ## Phase Details
 
@@ -76,9 +76,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Schema updates (contentType, articleType, steps[], faqs[]), search plugin, revalidation hooks, and migration
-- [ ] 03-02-PLAN.md — Blog pages (/blog, /blog/[slug]) with Article/HowTo JSON-LD, author bio, sitemap.ts, and robots.ts
-- [ ] 03-03-PLAN.md — KB pages (/help, /help/[slug]) with section grouping, search, breadcrumbs, and FAQPage JSON-LD
+- [x] 03-01-PLAN.md — Schema updates (contentType, articleType, steps[], faqs[]), search plugin, revalidation hooks, and migration
+- [x] 03-02-PLAN.md — Blog pages (/blog, /blog/[slug]) with Article/HowTo JSON-LD, author bio, sitemap.ts, and robots.ts
+- [x] 03-03-PLAN.md — KB pages (/help, /help/[slug]) with section grouping, search, breadcrumbs, and FAQPage JSON-LD
 
 ---
 
@@ -91,4 +91,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Infrastructure | 2/2 | Complete | 2026-02-18 |
 | 2. Content Model | 2/2 | Complete | 2026-02-18 |
-| 3. Frontend & SEO | 0/3 | Not started | - |
+| 3. Frontend & SEO | 3/3 | Complete | 2026-02-19 |
