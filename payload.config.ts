@@ -12,6 +12,7 @@ import { Authors } from './src/collections/Authors'
 import { Categories } from './src/collections/Categories'
 import { Sections } from './src/collections/Sections'
 import { Posts } from './src/collections/Posts'
+import { KnowledgeBase } from './src/collections/KnowledgeBase'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Authors, Categories, Sections, Posts],
+  collections: [Users, Media, Authors, Categories, Sections, Posts, KnowledgeBase],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

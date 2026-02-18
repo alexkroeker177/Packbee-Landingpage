@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     sections: Section;
     posts: Post;
+    'knowledge-base': KnowledgeBase;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,6 +88,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     sections: SectionsSelect<false> | SectionsSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -280,6 +282,61 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base".
+ */
+export interface KnowledgeBase {
+  id: number;
+  title: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  /**
+   * The knowledge base section this article belongs to.
+   */
+  section: number | Section;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Override the canonical URL for this page. Leave blank to use the default URL.
+     */
+    canonicalURL?: string | null;
+    /**
+     * Override the social sharing title. Defaults to SEO Title if blank.
+     */
+    ogTitle?: string | null;
+    /**
+     * Check to exclude this page from search engine indexing and the sitemap.
+     */
+    noIndex?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -417,6 +474,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'knowledge-base';
+        value: number | KnowledgeBase;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -550,6 +611,30 @@ export interface PostsSelect<T extends boolean = true> {
   categories?: T;
   tags?: T;
   publishedAt?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        canonicalURL?: T;
+        ogTitle?: T;
+        noIndex?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "knowledge-base_select".
+ */
+export interface KnowledgeBaseSelect<T extends boolean = true> {
+  title?: T;
+  generateSlug?: T;
+  slug?: T;
+  section?: T;
+  body?: T;
   meta?:
     | T
     | {
