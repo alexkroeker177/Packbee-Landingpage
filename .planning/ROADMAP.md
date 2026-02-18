@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Route group restructure, Payload 3.77.0 install, and (payload) route group boilerplate
+- [x] 01-01-PLAN.md — Route group restructure, Payload 3.77.0 install, and (payload) route group boilerplate
 - [ ] 01-02-PLAN.md — Supabase database connection, initial migration, media uploads, and admin login
 
 ---
@@ -89,6 +89,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Infrastructure | 0/2 | Not started | - |
+| 1. Infrastructure | 1/2 | In progress | - |
 | 2. Content Model | 0/2 | Not started | - |
 | 3. Frontend & SEO | 0/3 | Not started | - |
