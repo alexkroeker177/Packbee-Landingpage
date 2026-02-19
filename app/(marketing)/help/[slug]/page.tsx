@@ -6,6 +6,8 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { KnowledgeBase, Section } from '@/payload-types'
+import { BlogPageChrome } from '@/components/BlogPageChrome'
+import { ChevronRight } from 'lucide-react'
 
 // ---------------------------------------------------------------------------
 // Data fetching — wrapped in React.cache() so generateMetadata and page share
@@ -143,46 +145,36 @@ function SectionLanding({
   articles: Pick<KnowledgeBase, 'id' | 'title' | 'slug' | 'excerpt'>[]
 }) {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-6 py-12">
       {/* Breadcrumbs */}
-      <nav aria-label="breadcrumb" className="mb-6">
-        <ol className="flex gap-2 text-sm text-gray-500">
-          <li>
-            <Link href="/" className="hover:underline">
-              Home
-            </Link>{' '}
-            /
-          </li>
-          <li>
-            <Link href="/help" className="hover:underline">
-              Help
-            </Link>{' '}
-            /
-          </li>
-          <li aria-current="page">{section.title}</li>
+      <nav aria-label="breadcrumb" className="mb-8">
+        <ol className="flex items-center gap-1 text-sm text-[var(--color-text-muted)]">
+          <li><Link href="/" className="hover:text-[var(--color-primary-700)] transition-colors">Home</Link></li>
+          <li><ChevronRight size={14} /></li>
+          <li><Link href="/help" className="hover:text-[var(--color-primary-700)] transition-colors">Help</Link></li>
+          <li><ChevronRight size={14} /></li>
+          <li className="text-[var(--color-text-primary)] font-medium" aria-current="page">{section.title}</li>
         </ol>
       </nav>
 
-      <h1 className="text-3xl font-bold mb-4">{section.title}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4">{section.title}</h1>
       {section.description && (
-        <p className="text-gray-600 mb-8">{section.description}</p>
+        <p className="text-[var(--color-text-secondary)] mb-8 text-lg">{section.description}</p>
       )}
 
       {articles.length === 0 ? (
-        <p className="text-gray-500">No articles in this section yet.</p>
+        <p className="text-[var(--color-text-muted)]">No articles in this section yet.</p>
       ) : (
-        <ul>
+        <ul className="space-y-2">
           {articles.map((article) => (
-            <li key={article.id} className="py-3 border-b last:border-b-0">
-              <Link
-                href={`/help/${article.slug}`}
-                className="font-medium hover:underline"
-              >
-                {article.title}
+            <li key={article.id}>
+              <Link href={`/help/${article.slug}`}
+                className="block p-4 rounded-xl border border-[var(--color-border)] hover:shadow-sm hover:bg-[var(--color-surface-50)] transition-all group">
+                <span className="font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-primary-700)] transition-colors">{article.title}</span>
+                {article.excerpt && (
+                  <p className="text-sm text-[var(--color-text-secondary)] mt-1">{article.excerpt}</p>
+                )}
               </Link>
-              {article.excerpt && (
-                <p className="text-sm text-gray-600 mt-0.5">{article.excerpt}</p>
-              )}
             </li>
           ))}
         </ul>
@@ -231,39 +223,29 @@ function ArticlePage({ article }: { article: KnowledgeBase }) {
         />
       )}
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-2xl mx-auto px-4 py-12">
         {/* Breadcrumbs */}
-        <nav aria-label="breadcrumb" className="mb-6">
-          <ol className="flex gap-2 text-sm text-gray-500">
-            <li>
-              <Link href="/" className="hover:underline">
-                Home
-              </Link>{' '}
-              /
-            </li>
-            <li>
-              <Link href="/help" className="hover:underline">
-                Help
-              </Link>{' '}
-              /
-            </li>
+        <nav aria-label="breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-1 text-sm text-[var(--color-text-muted)]">
+            <li><Link href="/" className="hover:text-[var(--color-primary-700)] transition-colors">Home</Link></li>
+            <li><ChevronRight size={14} /></li>
+            <li><Link href="/help" className="hover:text-[var(--color-primary-700)] transition-colors">Help</Link></li>
             {section && (
-              <li>
-                <Link href={`/help/${section.slug}`} className="hover:underline">
-                  {section.title}
-                </Link>{' '}
-                /
-              </li>
+              <>
+                <li><ChevronRight size={14} /></li>
+                <li><Link href={`/help/${section.slug}`} className="hover:text-[var(--color-primary-700)] transition-colors">{section.title}</Link></li>
+              </>
             )}
-            <li aria-current="page">{article.title}</li>
+            <li><ChevronRight size={14} /></li>
+            <li className="text-[var(--color-text-primary)] font-medium" aria-current="page">{article.title}</li>
           </ol>
         </nav>
 
         <article>
-          <h1 className="text-3xl font-bold mb-6">{article.title}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-8">{article.title}</h1>
 
           {article.body && (
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg prose-amber max-w-none">
               <RichText data={article.body} />
             </div>
           )}
@@ -271,11 +253,11 @@ function ArticlePage({ article }: { article: KnowledgeBase }) {
           {/* Visible FAQ section for faq-type articles */}
           {hasFaqs && (
             <section className="mt-8">
-              <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6">Frequently Asked Questions</h2>
               {(article.faqs ?? []).map((faq) => (
-                <div key={faq.id} className="mb-4">
-                  <h3 className="font-semibold mb-1">{faq.question}</h3>
-                  <p className="text-gray-700">{faq.answer}</p>
+                <div key={faq.id} className="p-4 bg-[var(--color-surface-50)] rounded-xl mb-3">
+                  <h3 className="font-semibold text-[var(--color-text-primary)] mb-1">{faq.question}</h3>
+                  <p className="text-[var(--color-text-secondary)]">{faq.answer}</p>
                 </div>
               ))}
             </section>
@@ -300,8 +282,16 @@ export default async function HelpPage({
   if (!data) notFound()
 
   if (data.type === 'section') {
-    return <SectionLanding section={data.section} articles={data.articles} />
+    return (
+      <BlogPageChrome>
+        <SectionLanding section={data.section} articles={data.articles} />
+      </BlogPageChrome>
+    )
   }
 
-  return <ArticlePage article={data.article} />
+  return (
+    <BlogPageChrome>
+      <ArticlePage article={data.article} />
+    </BlogPageChrome>
+  )
 }
