@@ -15,6 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Infrastructure** - Embed Payload CMS safely in the existing Next.js app without breaking the landing page
 - [x] **Phase 2: Content Model** - Define all collections, editorial workflow, and SEO fields so authors can create content in the admin panel
 - [x] **Phase 3: Frontend & SEO** - Build all public-facing routes with full SEO instrumentation so the site is indexable and live
+- [ ] **Phase 4: Design & Styling** - Style the blog and knowledge base pages to match PackBee's brand and deliver a polished reading experience
 
 ## Phase Details
 
@@ -82,13 +83,36 @@ Plans:
 
 ---
 
+### Phase 4: Design & Styling
+
+**Goal**: Blog and knowledge base pages are visually polished, consistent with PackBee's brand, and deliver a professional reading experience across all devices
+**Depends on**: Phase 3
+
+**Success Criteria** (what must be TRUE):
+1. All blog and KB pages render with the frosted-glass Navbar at top and dark Footer at bottom — consistent with the landing page
+2. Rich text content (blog posts, KB articles) is styled via prose-amber typography using brand color tokens — no raw Tailwind grays
+3. Blog listing shows a branded amber header with honeycomb texture and posts in a responsive card grid
+4. Help Center shows a hero-level search bar with branded background and sections displayed as navigable cards
+5. Breadcrumbs on KB pages use chevron separators and brand tokens
+6. Zero raw `text-gray-*`, `bg-yellow-*` classes remain on any blog or help page — all converted to CSS custom property tokens
+
+**Plans**: 3 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Install @tailwindcss/typography, prose-amber utility, and BlogPageChrome wrapper component
+- [ ] 04-02-PLAN.md — Blog listing (card grid, branded header) and blog post (prose-amber, author bio card) styling
+- [ ] 04-03-PLAN.md — Help listing (search hero, section cards) and help article (breadcrumbs, prose-amber) styling
+
+---
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Infrastructure | 2/2 | Complete | 2026-02-18 |
 | 2. Content Model | 2/2 | Complete | 2026-02-18 |
 | 3. Frontend & SEO | 3/3 | Complete | 2026-02-19 |
+| 4. Design & Styling | 0/3 | Not Started | — |
