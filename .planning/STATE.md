@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-18)
 
 **Core value:** Drive organic traffic to PackBee through SEO-optimized blog content and provide a self-serve knowledge base for customers and prospects.
-**Current focus:** Phase 3 complete — all pages, sitemap, robots.txt, and KB routes delivered
+**Current focus:** Phase 4 next — Design & Styling for blog and KB pages
 
 ## Current Position
 
-Phase: 3 of 3 (Frontend & SEO) — Complete
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-18 — Completed 03-03 (KB listing page, KB article/section page with disambiguation + FAQPage JSON-LD)
+Phase: 4 of 4 (Design & Styling) — In progress
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-19 — Completed 04-01-PLAN.md (typography plugin + BlogPageChrome)
 
-Progress: [██████████] 100%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -64,6 +64,9 @@ Recent decisions affecting current work:
 - [03-03]: DB disambiguation for /help/[slug] — section lookup runs first; section slugs take priority over article slugs
 - [03-03]: Search type from payload-types.ts has no `slug` field — slug is at `result.doc.value.slug` (on the populated KnowledgeBase document)
 - [03-03]: `overrideAccess: false` required on all KB article queries — public visitors must not see draft articles
+- [04-01]: `npm install --legacy-peer-deps` required for new packages — Payload CMS 3.77.0 strict peer dep conflict with next@16.1.6
+- [04-01]: `@utility prose-amber` with all 16 `--tw-prose-*` vars mapped to brand tokens — apply as `prose prose-amber` on rich text containers
+- [04-01]: `BlogPageChrome` is a server component — client boundary handled by Navbar/Footer internally
 
 ### Pending Todos
 
@@ -72,10 +75,14 @@ None.
 ### Blockers/Concerns
 
 - `NEXT_PUBLIC_SERVER_URL` env var needed for live preview URLs in Posts and KnowledgeBase collections (set before deploying to production)
-- Design pass is deferred — all pages use minimal Tailwind for structure only
+- Design pass now tracked as Phase 4 — all pages currently use minimal Tailwind for structure only
+
+### Roadmap Evolution
+
+- Phase 4 added: Design & Styling — style blog and KB pages to match PackBee brand
 
 ## Session Continuity
 
-Last session: 2026-02-18
-Stopped at: Completed 03-03-PLAN.md — KB listing page, KB article/section page, all phase 3 plans complete
+Last session: 2026-02-19
+Stopped at: Completed 04-01-PLAN.md — typography plugin + BlogPageChrome
 Resume file: None
