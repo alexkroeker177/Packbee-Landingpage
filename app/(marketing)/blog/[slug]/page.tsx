@@ -4,6 +4,7 @@ import { cache } from 'react'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { BlogPageChrome } from '@/components/BlogPageChrome'
 
 // ---------------------------------------------------------------------------
 // Data fetching — wrapped in React.cache() so generateMetadata and page share
@@ -156,7 +157,7 @@ export default async function BlogPostPage({
   }
 
   return (
-    <>
+    <BlogPageChrome>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -164,49 +165,43 @@ export default async function BlogPostPage({
         }}
       />
 
-      <article className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+      <article className="max-w-2xl mx-auto px-4 py-12">
+        {/* Featured image — contained with rounded corners */}
+        {featuredImage?.url && (
+          <div className="mb-8 rounded-2xl overflow-hidden">
+            <img src={featuredImage.url} alt={featuredImage.alt ?? ''} className="w-full h-64 md:h-96 object-cover" />
+          </div>
+        )}
 
-        <div className="text-sm text-gray-500 flex gap-2 mb-6">
+        <h1 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-4">{post.title}</h1>
+
+        <div className="flex gap-3 text-sm text-[var(--color-text-muted)] mb-8 pb-8 border-b border-[var(--color-border)]">
           {author && <span>{author.name}</span>}
-          {author && formattedDate && <span>·</span>}
+          {author && formattedDate && <span>&middot;</span>}
           {formattedDate && <span>{formattedDate}</span>}
         </div>
 
-        {featuredImage?.url && (
-          <img
-            src={featuredImage.url}
-            alt={featuredImage.alt ?? ''}
-            className="w-full h-64 object-cover mb-8 rounded"
-          />
-        )}
-
+        {/* Rich text body with prose-amber */}
         {post.body && (
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg prose-amber max-w-none">
             <RichText data={post.body} />
           </div>
         )}
 
-        {/* Author bio */}
+        {/* Featured author bio card */}
         {author && (
-          <div className="mt-12 border-t pt-8 flex gap-4 items-start">
+          <div className="mt-12 p-6 bg-[var(--color-section-d)] rounded-2xl border border-[var(--color-border)] flex gap-4 items-start">
             {authorAvatar?.url && (
-              <img
-                src={authorAvatar.url}
-                alt={author.name}
-                className="w-16 h-16 rounded-full object-cover flex-shrink-0"
-              />
+              <img src={authorAvatar.url} alt={author.name} className="w-16 h-16 rounded-full object-cover flex-shrink-0" />
             )}
             <div>
-              <strong className="block text-base font-semibold">{author.name}</strong>
-              {author.role && (
-                <span className="text-sm text-gray-500 block mb-1">{author.role}</span>
-              )}
-              {author.bio && <p className="text-sm text-gray-600">{author.bio}</p>}
+              <strong className="block text-base font-semibold text-[var(--color-text-primary)]">{author.name}</strong>
+              {author.role && <span className="text-sm text-[var(--color-text-secondary)] block mb-1">{author.role}</span>}
+              {author.bio && <p className="text-sm text-[var(--color-text-secondary)] mt-1">{author.bio}</p>}
             </div>
           </div>
         )}
       </article>
-    </>
+    </BlogPageChrome>
   )
 }
