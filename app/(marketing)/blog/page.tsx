@@ -44,7 +44,8 @@ export default async function BlogListingPage({ searchParams }: { searchParams: 
   return (
     <BlogPageChrome>
       {/* Branded page header with honeycomb texture */}
-      <section className="relative bg-[var(--color-section-b)] bg-honeycomb overflow-hidden py-16 px-6">
+      <section className="relative bg-[var(--color-section-a)] overflow-hidden py-16 px-6">
+        <div className="absolute inset-0 bg-honeycomb opacity-[0.07] pointer-events-none" />
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-4">Blog</h1>
           <p className="text-lg text-[var(--color-text-secondary)]">Insights and tutorials for e-commerce fulfillment</p>

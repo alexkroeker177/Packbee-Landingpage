@@ -21,7 +21,8 @@ export default async function HelpListingPage({ searchParams }: { searchParams: 
 
   // Shared hero section
   const SearchHero = (
-    <section className="relative bg-[var(--color-section-b)] bg-honeycomb overflow-hidden py-16 px-6">
+    <section className="relative bg-[var(--color-section-a)] overflow-hidden py-16 px-6">
+      <div className="absolute inset-0 bg-honeycomb opacity-[0.07] pointer-events-none" />
       <div className="relative max-w-2xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-6">Help Center</h1>
         <p className="text-lg text-[var(--color-text-secondary)] mb-8">Find answers, tutorials, and guides about using PackBee</p>

@@ -16,6 +16,18 @@ export const Hero: React.FC = () => {
   const leftContentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    // Compute circular clip-path: ensure equal pixel radii so the
+    // ellipse looks like a circle regardless of viewport aspect ratio.
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const rxPercent = Math.round((0.9 * vh / vw) * 100);
+    const initialClip = `ellipse(${rxPercent}% 90% at 50% 100%)`;
+
+    // Apply immediately (useLayoutEffect runs before paint)
+    if (maskRef.current) {
+      maskRef.current.style.clipPath = initialClip;
+    }
+
     const ctx = gsap.context(() => {
 
       ScrollTrigger.matchMedia({
@@ -40,7 +52,7 @@ export const Hero: React.FC = () => {
 
           // 1. Background Expansion
           tl.fromTo(maskRef.current,
-            { clipPath: "ellipse(50% 90% at 50% 100%)" },
+            { clipPath: initialClip },
             { clipPath: "ellipse(150% 150% at 50% 100%)", duration: 1, ease: "power2.inOut" },
             0
           );
@@ -96,7 +108,7 @@ export const Hero: React.FC = () => {
 
           // 1. Background Expansion
           tl.fromTo(maskRef.current,
-            { clipPath: "ellipse(50% 90% at 50% 100%)" },
+            { clipPath: initialClip },
             { clipPath: "ellipse(150% 150% at 50% 100%)", duration: 1, ease: "power2.inOut" },
             0
           );
@@ -187,7 +199,7 @@ export const Hero: React.FC = () => {
         <div className="absolute inset-0 z-10 w-full h-full pointer-events-none">
 
             {/* Inner Wrapper */}
-            <div className="w-full h-full relative pointer-events-auto">
+            <div className="w-full h-full relative pointer-events-auto max-w-[2000px] mx-auto">
 
                 {/* --- 1. Initial Hero Text --- */}
                 <div ref={heroTextRef} className="absolute top-0 left-0 right-0 z-20 flex flex-col items-center text-center pt-32 lg:pt-44 px-4">
