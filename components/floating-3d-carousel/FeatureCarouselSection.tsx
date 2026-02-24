@@ -13,7 +13,7 @@ const HEADING_TEXT = "PackBee in Aktion";
 
 const features: CarouselFeature[] = [
   {
-    src: "/images/dashboard.png",
+    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=960&h=600&fit=crop",
     alt: "PackBee Dashboard mit Echtzeit-Packmetriken",
     title: "Dashboard",
     subtitle: "Echtzeit-Überblick",
@@ -21,7 +21,7 @@ const features: CarouselFeature[] = [
       "Live-Ansicht aller Packvorgänge. Bestellungen, Fehlerquoten und Team-Performance auf einen Blick.",
   },
   {
-    src: "/images/verlauf.png",
+    src: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=960&h=600&fit=crop",
     alt: "PackBee Packverlauf mit Filteroptionen",
     title: "Packverlauf",
     subtitle: "Lückenlose Dokumentation",
@@ -29,7 +29,7 @@ const features: CarouselFeature[] = [
       "Jede Bestellung, jeder Scan, jedes Detail. Nach Packer, Datum oder Status filtern.",
   },
   {
-    src: "https://picsum.photos/seed/packbee-analytics/960/600",
+    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=960&h=600&fit=crop",
     alt: "Analyse-Dashboard mit Diagrammen und Berichten",
     title: "Analysen & Berichte",
     subtitle: "Datenbasierte Einblicke",
@@ -37,7 +37,7 @@ const features: CarouselFeature[] = [
       "Fulfillment-Performance verstehen mit detaillierten Diagrammen, Trends und exportierbaren Berichten.",
   },
   {
-    src: "https://picsum.photos/seed/packbee-team/960/600",
+    src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=960&h=600&fit=crop",
     alt: "Team-Verwaltung mit Packer-Zuweisungen",
     title: "Team-Verwaltung",
     subtitle: "Team organisieren",
@@ -45,7 +45,7 @@ const features: CarouselFeature[] = [
       "Rollen zuweisen, individuelle Packer-Statistiken überwachen und das Warehouse-Team effizient steuern.",
   },
   {
-    src: "https://picsum.photos/seed/packbee-channels/960/600",
+    src: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=960&h=600&fit=crop",
     alt: "Multi-Channel-Fulfillment mit einheitlicher Bestellübersicht",
     title: "Multi-Channel",
     subtitle: "Einheitliches Fulfillment",

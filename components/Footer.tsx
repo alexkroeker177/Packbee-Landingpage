@@ -8,7 +8,7 @@ const productLinks = [
   { label: "Dashboard", href: "#" },
   { label: "Team-Verwaltung", href: "#" },
   { label: "BillBee-Integration", href: "#" },
-  { label: "Preise", href: "#" },
+  { label: "Preise", href: "#preise" },
 ];
 
 const companyLinks = [

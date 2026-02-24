@@ -32,12 +32,17 @@ export const Hero: React.FC = () => {
 
       ScrollTrigger.matchMedia({
 
-        // Desktop: >=1280px — split layout (text left, prototype right)
-        "(min-width: 1280px)": function() {
+        // Desktop: >=1024px — split layout (text left, prototype right)
+        "(min-width: 1024px)": function() {
           const vw = window.innerWidth;
-          const t = Math.max(0, Math.min(1, (vw - 1280) / (1920 - 1280)));
-          const endScale = 0.75 + t * 0.12;
-          const endXPercent = 22 - t * 10;
+          const vh = window.innerHeight;
+          const t = Math.max(0, Math.min(1, (vw - 1024) / (1920 - 1024)));
+          const endScale = 0.65 + t * 0.22;
+          const endXPercent = 50 - t * 36;
+          // Measure actual hero text bottom so the gap between CTA and prototype is always consistent
+          const heroBottom = heroTextRef.current!.getBoundingClientRect().bottom;
+          const appTop = (appWindowWrapperRef.current!.firstElementChild as HTMLElement).getBoundingClientRect().top;
+          const startYPercent = Math.max(0, ((heroBottom + 48 - appTop) / vh) * 100);
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -70,7 +75,7 @@ export const Hero: React.FC = () => {
           // 3. App Window - Move from Center to Right (adaptive)
           tl.fromTo(appWindowWrapperRef.current,
             {
-              yPercent: 45,
+              yPercent: startYPercent,
               xPercent: 0,
               scale: 0.95
             },
@@ -93,8 +98,12 @@ export const Hero: React.FC = () => {
 
         },
 
-        // Mobile/Tablet: <1280px — centered, stacked
-        "(max-width: 1279px)": function() {
+        // Mobile/Tablet: <1024px — centered, stacked
+        "(max-width: 1023px)": function() {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const isLandscape = vw > vh;
+
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: componentRef.current,
@@ -124,16 +133,20 @@ export const Hero: React.FC = () => {
           }, 0);
 
           // 3. App Window - Stay centered, scale to nearly full width
+          // Landscape: image is proportionally huge, start hidden and reveal on scroll
+          // Portrait: image is small relative to viewport, show near CTA
           tl.fromTo(appWindowWrapperRef.current,
             {
-              yPercent: 45,
+              yPercent: isLandscape ? 30 : 20,
               xPercent: 0,
-              scale: 0.95
+              scale: 0.95,
+              opacity: isLandscape ? 0 : 1
             },
             {
               yPercent: 5,
               xPercent: 0,
               scale: 0.95,
+              opacity: 1,
               duration: 1,
               ease: "power2.inOut"
             },
@@ -224,18 +237,18 @@ export const Hero: React.FC = () => {
                 {/* --- 2. New Left Content (Split View) --- */}
                 <div
                     ref={leftContentRef}
-                    className="absolute z-20 max-w-md px-6 xl:px-0 opacity-0 pointer-events-none
+                    className="absolute z-20 max-w-md px-6 lg:px-0 opacity-0 pointer-events-none
                       top-[8%] left-0 right-0 mx-auto
-                      xl:top-1/2 xl:left-[6%] xl:right-auto xl:mx-0 xl:-translate-y-1/2"
+                      lg:top-1/2 lg:left-[6%] lg:right-auto lg:mx-0 lg:-translate-y-1/2"
                 >
-                    <div className="xl:bg-white/10 xl:backdrop-blur-md xl:rounded-2xl xl:p-8 xl:border xl:border-white/20 pointer-events-auto">
-                        <h2 className="text-3xl sm:text-4xl xl:text-5xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
+                    <div className="lg:p-8 pointer-events-auto">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
                             Volle Kontrolle <br/> beim Packen
                         </h2>
-                        <p className="text-base xl:text-lg text-white/90 mb-8 leading-relaxed drop-shadow-md">
+                        <p className="text-lg lg:text-xl text-white/90 mb-8 leading-relaxed">
                             Jede Bestellung wird gescannt, jeder Artikel verifiziert. Fehlerhafte Sendungen gehören der Vergangenheit an.
                         </p>
-                        <a href="#" className="inline-flex items-center text-lg font-semibold text-white hover:gap-2 transition-all drop-shadow-md">
+                        <a href="#" className="inline-flex items-center text-xl font-semibold text-white hover:gap-2 transition-all">
                             Jetzt starten <ChevronRight className="ml-1" />
                         </a>
                     </div>
@@ -248,7 +261,18 @@ export const Hero: React.FC = () => {
                 >
                     <div className="w-full max-w-[1240px] px-4 lg:px-0 pointer-events-auto">
                         <div className="w-full transform shadow-[0_50px_100px_-20px_rgba(50,50,93,0.4)] rounded-xl bg-white">
-                            <AppWindow />
+                            {/* Interactive prototype — desktop only */}
+                            <div className="hidden xl:block">
+                                <AppWindow />
+                            </div>
+                            {/* Static screenshot — mobile/tablet */}
+                            <div className="xl:hidden">
+                                <img
+                                    src="/images/dashboard.png"
+                                    alt="PackBee Dashboard — Echtzeit-Packverifikation"
+                                    className="w-full h-auto rounded-xl"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
               <a href="#" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">
                 Ressourcen
               </a>
-              <a href="#" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">Preise</a>
+              <a href="#preise" className="hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-1.5 rounded-lg transition-colors">Preise</a>
             </div>
           </div>
 
@@ -88,7 +88,7 @@ export const Navbar: React.FC = () => {
               Ressourcen
             </a>
             <a
-              href="#"
+              href="#preise"
               onClick={() => setIsMenuOpen(false)}
               className="text-[15px] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/5 px-3 py-2.5 rounded-lg transition-colors"
             >
